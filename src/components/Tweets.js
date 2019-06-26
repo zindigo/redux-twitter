@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
@@ -11,12 +11,12 @@ class Tweets extends React.Component {
 	}
 	handleHeartClick = (e, tweet) => {
 		e.preventDefault();
-		const { dispatch, authedUser } = this.props
+		const { dispatch } = this.props
 		// save change
 		dispatch(handleLikeTweet(tweet))
 	}
 	getReplyToTweet(tweetId) {
-		const { allTweets, users } = this.props
+		const { allTweets } = this.props
 		return allTweets.find((tweet) => {
 			return tweet.id === tweetId
 		})
