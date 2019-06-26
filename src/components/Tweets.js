@@ -31,8 +31,6 @@ class Tweets extends React.Component {
 	}
 	render() {
 		const { allTweets, users } = this.props
-		console.log('tweets', allTweets)
-		console.log('users', users)
 
 		return (
 		    <div>
