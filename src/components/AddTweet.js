@@ -1,17 +1,42 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { handleAddTweet } from '../actions/tweets'
 
 class AddTweet extends React.Component {
+	state = {
+		text: ''
+	}
+	isDisabled = () => {
+		const { tweet } = this.state
+
+		return tweet === ''
+	}
+	handleInputChange = (e) => {
+		const { value } = e.target
+
+		this.setState(() =>({
+			text: value
+		}))
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		this.props.history.push('/')
+		this.props.dispatch(handleAddTweet(this.state))
+	}
 	render() {
 		return (
-		    <div>
-		    <h1>Add Tweet</h1>
-
-		    </div>
+		    <form className='new-tweet' onSubmit={this.handleSubmit}>
+			    <h3 className='center'>Compose new Tweet</h3>
+			    <textarea
+			    	className='textarea'
+			    	onChange={this.handleInputChange}
+			    	placeholder="What's happening?">
+			    </textarea>
+			    <button className='btn' type='submit' disabled={this.isDisabled()}>Submit</button>
+		    </form>
 		)
 	}
 }
 
 
-export default AddTweet
+export default connect()(AddTweet)

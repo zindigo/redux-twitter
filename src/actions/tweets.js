@@ -34,7 +34,7 @@ export function handleAddTweet(tweet) {
 
 		dispatch(showLoading())
 		return saveTweet({
-			...tweet,
+			text: tweet.text,
 			author: authedUser
 		})
 			.then((tweet) => dispatch(addTweet(tweet)))
