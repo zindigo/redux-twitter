@@ -5,9 +5,6 @@ import { formatDate } from '../utils/helpers'
 import { handleLikeTweet } from '../actions/tweets'
 
 class Tweets extends React.Component {
-	state = {
-		tweets: ''
-	}
 	handleReplyToClick = (e, tweetId) => {
 		e.preventDefault();
 		this.props.history.push('/tweet/'+ tweetId)
