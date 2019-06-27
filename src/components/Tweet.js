@@ -6,12 +6,13 @@ import TweetCard from './TweetCard'
 class Tweet extends React.Component {
 	render() {
 		const { tweets } = this.props
-		const tweet = this.props.tweets[this.props.match.params.id]
+		const { id } = this.props.match.params
+		const tweet = tweets[id]
 
 		return (
 		    <div>
 		    	<TweetCard tweet={tweet} />
-		    	<AddTweet />
+		    	<AddTweet replyingTo={tweet.id} />
 		    	{ tweet.replies &&
 		    		<div>
 				    	<h3 className='center'>Replies</h3>

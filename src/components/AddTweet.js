@@ -5,7 +5,8 @@ import { withRouter } from 'react-router'
 
 class AddTweet extends React.Component {
 	state = {
-		text: ''
+		text: '',
+		replyingTo: ''
 	}
 	isDisabled = () => {
 		const { text } = this.state
@@ -16,21 +17,32 @@ class AddTweet extends React.Component {
 		const { value } = e.target
 
 		this.setState(() =>({
-			text: value
+			text: value,
+			replyingTo: this.props.replyingTo
 		}))
 	}
 	handleSubmit = (e) => {
 		e.preventDefault()
-		this.props.history.push('/')
+		if (this.state.replyingTo === undefined) {
+			this.props.history.push('/')
+		}
 		this.props.dispatch(handleAddTweet(this.state))
+
+		// reset the input field
+		this.setState(() => ({
+			text: ''
+		}))
 	}
 	render() {
+		const { text } = this.state
+
 		return (
 		    <form className='new-tweet' onSubmit={this.handleSubmit}>
 			    <h3 className='center'>Compose new Tweet</h3>
 			    <textarea
 			    	className='textarea'
 			    	onChange={this.handleInputChange}
+			    	value={text}
 			    	placeholder="What's happening?">
 			    </textarea>
 			    <button className='btn' type='submit' disabled={this.isDisabled()}>Submit</button>
