@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { handleAddTweet } from '../actions/tweets'
+import { withRouter } from 'react-router'
 
 class AddTweet extends React.Component {
 	state = {
@@ -39,4 +40,4 @@ class AddTweet extends React.Component {
 }
 
 
-export default connect()(AddTweet)
+export default withRouter(connect()(AddTweet))
