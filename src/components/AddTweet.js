@@ -7,9 +7,9 @@ class AddTweet extends React.Component {
 		text: ''
 	}
 	isDisabled = () => {
-		const { tweet } = this.state
+		const { text } = this.state
 
-		return tweet === ''
+		return text === ''
 	}
 	handleInputChange = (e) => {
 		const { value } = e.target
