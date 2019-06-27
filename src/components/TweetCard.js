@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
 import { handleLikeTweet } from '../actions/tweets'
+import { withRouter } from 'react-router'
 
 class TweetCard extends React.Component {
 	handleReplyToClick = (e, tweetId) => {
@@ -86,4 +87,4 @@ function mapStateToProps({ authedUser, tweets, users }) {
 	}
 }
 
-export default connect(mapStateToProps)(TweetCard)
+export default withRouter(connect(mapStateToProps)(TweetCard))
