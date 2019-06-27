@@ -19,7 +19,10 @@ export default function tweets (state = {}, action) {
 			...state,
 			[parentTweet.id]: {
 				...parentTweet,
-				replies: parentTweet.replies.concat([childTweet.id])
+				replies: [
+					childTweet.id,
+					...parentTweet.replies
+				]
 			}
 		}
     case TOGGLE_TWEET_LIKES:
