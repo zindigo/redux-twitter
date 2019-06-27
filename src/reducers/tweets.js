@@ -1,4 +1,4 @@
-import { RECEIVE_TWEETS, ADD_TWEET, TOGGLE_TWEET_LIKES } from '../actions/tweets'
+import { RECEIVE_TWEETS, ADD_TWEET, ADD_REPLY, TOGGLE_TWEET_LIKES } from '../actions/tweets'
 
 export default function tweets (state = {}, action) {
   switch(action.type) {
@@ -12,16 +12,22 @@ export default function tweets (state = {}, action) {
     		...state,
     		[action.tweet.id]: action.tweet
     	}
-    case TOGGLE_TWEET_LIKES:
-    	const { tweet, hasLiked, authedUser } = action
-    	let likesArray = []
+    case ADD_REPLY:
+    	var { parentTweet, childTweet } = action
 
-    	if (hasLiked === true) {
-    		likesArray = tweet.likes.concat([authedUser])
-    	}
-    	else {
-    		likesArray = tweet.likes.filter((user) => user !== authedUser)
-    	}
+		return {
+			...state,
+			[parentTweet.id]: {
+				...parentTweet,
+				replies: parentTweet.replies.concat([childTweet.id])
+			}
+		}
+    case TOGGLE_TWEET_LIKES:
+    	var { tweet, hasLiked, authedUser } = action
+
+    	let likesArray = (hasLiked === true)
+    		? tweet.likes.concat([authedUser])
+    		: tweet.likes.filter((user) => user !== authedUser)
 
 		return {
 			...state,
